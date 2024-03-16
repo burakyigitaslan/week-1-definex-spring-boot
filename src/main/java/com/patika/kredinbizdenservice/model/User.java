@@ -1,7 +1,9 @@
 package com.patika.kredinbizdenservice.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class User {
 
@@ -13,12 +15,13 @@ public class User {
     private String phoneNumber;
     private Boolean isActive;
     private List<Application> applicationList;
+    private static Set<String> registeredEmails = new HashSet<>();
 
     public User(String name, String surname, LocalDate birthDate, String email, String password, String phoneNumber, Boolean isActive) {
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
-        this.email = email;
+        setEmail(email);
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.isActive = isActive;
@@ -27,7 +30,7 @@ public class User {
     public User(String name, String surname, String email, String password, String phoneNumber, Boolean isActive) {
         this.name = name;
         this.surname = surname;
-        this.email = email;
+        setEmail(email);
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.isActive = isActive;
@@ -54,7 +57,11 @@ public class User {
     }
 
     public void setEmail(String email) {
+        if (registeredEmails.contains(email)) {
+            throw new IllegalArgumentException("Email is already registered");
+        }
         this.email = email;
+        registeredEmails.add(email);
     }
 
     public String getPassword() {
