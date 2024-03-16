@@ -1,5 +1,7 @@
 package com.patika.kredinbizdenservice.model;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +24,7 @@ public class User {
         this.surname = surname;
         this.birthDate = birthDate;
         setEmail(email);
-        this.password = password;
+        setPassword(password);
         this.phoneNumber = phoneNumber;
         this.isActive = isActive;
     }
@@ -31,7 +33,7 @@ public class User {
         this.name = name;
         this.surname = surname;
         setEmail(email);
-        this.password = password;
+        setPassword(password);
         this.phoneNumber = phoneNumber;
         this.isActive = isActive;
     }
@@ -69,7 +71,19 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        String hashedPassword;
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+            byte[] bytes = messageDigest.digest(password.getBytes());
+            StringBuilder result = new StringBuilder();
+            for (byte aByte : bytes) {
+                result.append(String.format("%02x", aByte));
+            }
+            hashedPassword = result.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        this.password = hashedPassword;
     }
 
     public String getPhoneNumber() {
