@@ -1,6 +1,6 @@
 package com.patika.kredinbizdenservice.enums;
 
-public enum VechileStatuType {
+public enum VehicleStatusType {
 
     NEW,
     USED

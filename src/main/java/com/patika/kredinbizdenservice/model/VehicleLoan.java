@@ -1,20 +1,20 @@
 package com.patika.kredinbizdenservice.model;
 
 import com.patika.kredinbizdenservice.enums.LoanType;
-import com.patika.kredinbizdenservice.enums.VechileStatuType;
+import com.patika.kredinbizdenservice.enums.VehicleStatusType;
 
 import java.math.BigDecimal;
 
-public class VechileLoan extends Loan {
+public class VehicleLoan extends Loan {
 
     private LoanType loanType = LoanType.ARAC_KREDISI;
-    private VechileStatuType vechileStatuType;
+    private VehicleStatusType vehicleStatusType;
 
-    public VechileLoan() {
+    public VehicleLoan() {
 
     }
 
-    public VechileLoan(BigDecimal amount, Integer installment, Double interestRate) {
+    public VehicleLoan(BigDecimal amount, Integer installment, Double interestRate) {
         super(amount, installment, interestRate);
     }
 
