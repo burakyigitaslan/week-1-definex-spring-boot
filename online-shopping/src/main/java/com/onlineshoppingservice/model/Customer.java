@@ -1,40 +1,34 @@
-package com.patika.kredinbizdenservice.model;
+package com.onlineshoppingservice.model;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class User {
-
+public class Customer {
     private String name;
     private String surname;
     private LocalDate birthDate;
-    private String email; //bir email ile bir kere kayıt olunabilir.
-    private String password; //hash fonskiyonlarından biri ile hashlanecek.
+    private String email;
+    private String password;
     private String phoneNumber;
+    private List<Order> orderList;
+    private String address;
     private Boolean isActive;
-    private List<Application> applicationList;
-    private static Set<String> registeredEmails = new HashSet<>();
+    private static final Set<String> registeredEmails = new HashSet<>();
 
-    public User(String name, String surname, LocalDate birthDate, String email, String password, String phoneNumber, Boolean isActive) {
+    public Customer(String name, String surname, LocalDate birthDate, String email, String password, String phoneNumber, String address, Boolean isActive) {
+        this.orderList=new ArrayList<>();
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
         setEmail(email);
         setPassword(password);
         this.phoneNumber = phoneNumber;
-        this.isActive = isActive;
-    }
-
-    public User(String name, String surname, String email, String password, String phoneNumber, Boolean isActive) {
-        this.name = name;
-        this.surname = surname;
-        setEmail(email);
-        setPassword(password);
-        this.phoneNumber = phoneNumber;
+        this.address = address;
         this.isActive = isActive;
     }
 
@@ -52,6 +46,14 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getEmail() {
@@ -94,6 +96,22 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Boolean getActive() {
         return isActive;
     }
@@ -102,19 +120,11 @@ public class User {
         isActive = active;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public void placeOrder(Order order) {
+        orderList.add(order);
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public List<Application> getApplicationList() {
-        return applicationList;
-    }
-
-    public void setApplicationList(List<Application> applicationList) {
-        this.applicationList = applicationList;
+    public Integer calculateAge() {
+        return LocalDate.now().getYear() - birthDate.getYear();
     }
 }
