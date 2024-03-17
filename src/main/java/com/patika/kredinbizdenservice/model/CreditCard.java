@@ -9,13 +9,12 @@ public class CreditCard implements Product{
     private List<Campaign> campaignList;
     private Bank bank;
 
-    public CreditCard() {
 
-    }
-
-    public CreditCard(BigDecimal fee, List<Campaign> campaignList) {
+    public CreditCard(BigDecimal fee, List<Campaign> campaignList, CreditCardHandler creditCardHandler) {
         this.fee = fee;
         this.campaignList = campaignList;
+
+        creditCardHandler.addCreditCard(this);
     }
 
     public BigDecimal getFee() {
