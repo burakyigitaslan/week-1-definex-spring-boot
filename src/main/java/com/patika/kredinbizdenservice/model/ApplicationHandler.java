@@ -1,5 +1,6 @@
 package com.patika.kredinbizdenservice.model;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class ApplicationHandler {
@@ -31,6 +32,22 @@ public class ApplicationHandler {
         userAppliedMost = Collections.max(userNumberOfApplication.entrySet(), Map.Entry.comparingByValue()).getKey();
 
         return userAppliedMost;
+    }
 
+    public Map<User, BigDecimal> findUserWithHighestLoanAmount(){
+        User userWithHighestLoanAmount = null;
+        BigDecimal highestLoanAmount = BigDecimal.ZERO;
+
+        for (Application application : applications) {
+            if (application.getLoan() != null && (application.getLoan().getAmount().compareTo(BigDecimal.ZERO) > 0)) {
+                highestLoanAmount = application.getLoan().getAmount();
+                userWithHighestLoanAmount = application.getUser();
+            }
+        }
+
+        Map<User, BigDecimal> userAndLoanAmount= new HashMap<>();
+        userAndLoanAmount.put(userWithHighestLoanAmount, highestLoanAmount);
+
+        return userAndLoanAmount;
     }
 }
