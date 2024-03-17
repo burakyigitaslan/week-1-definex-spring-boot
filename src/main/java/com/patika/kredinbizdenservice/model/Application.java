@@ -13,9 +13,6 @@ public class Application {
     private LocalDateTime localDateTime;
     private ApplicationStatus applicationStatus;
 
-    private Application() {
-    }
-
     /*
     public Application(CreditCard creditCard, User user, LocalDateTime localDateTime) {
         this.creditCard = creditCard;
@@ -24,18 +21,22 @@ public class Application {
         this.applicationStatus = ApplicationStatus.INITIAL;
     }*/
 
-    public Application(Product product, User user, LocalDateTime localDateTime) {
+    public Application(Product product, User user, LocalDateTime localDateTime, ApplicationHandler applicationHandler) {
         this.product = product;
         this.user = user;
         this.localDateTime = localDateTime;
         this.applicationStatus = ApplicationStatus.INITIAL;
+
+        applicationHandler.addApplication(this);
     }
 
-    public Application(Loan loan, User user, LocalDateTime localDateTime) {
+    public Application(Loan loan, User user, LocalDateTime localDateTime, ApplicationHandler applicationHandler) {
         this.loan = loan;
         this.user = user;
         this.localDateTime = localDateTime;
         this.applicationStatus = ApplicationStatus.INITIAL;
+
+        applicationHandler.addApplication(this);
     }
 
     public Loan getLoan() {
