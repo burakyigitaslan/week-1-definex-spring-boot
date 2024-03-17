@@ -64,4 +64,16 @@ public class ApplicationHandler {
 
         return applicationsMadeInLastMonth;
     }
+
+    public List<Application> getApplicationsByEmail(String email) {
+        List<Application> applicationsFilteredByEmail = new ArrayList<>();
+
+        for (Application application : applications) {
+            if (application.getUser().getEmail().equals(email)) {
+                applicationsFilteredByEmail.add(application);
+            }
+        }
+
+        return applicationsFilteredByEmail;
+    }
 }
