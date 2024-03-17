@@ -1,6 +1,7 @@
 package com.patika.kredinbizdenservice.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class ApplicationHandler {
@@ -49,5 +50,18 @@ public class ApplicationHandler {
         userAndLoanAmount.put(userWithHighestLoanAmount, highestLoanAmount);
 
         return userAndLoanAmount;
+    }
+
+    public List<Application> listApplicationsMadeInLastMonth() {
+        List<Application> applicationsMadeInLastMonth = new ArrayList<>();
+        LocalDateTime lastMonth = LocalDateTime.now().minusMonths(1);
+
+        for (Application application : applications) {
+            if (application.getLocalDateTime().isAfter(lastMonth)) {
+                applicationsMadeInLastMonth.add(application);
+            }
+        }
+
+        return applicationsMadeInLastMonth;
     }
 }
